@@ -6,8 +6,7 @@
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
-                <img src="img/fountain adm.jpg" alt="" width="55%" style="margin-top: 20px; border-radius:40%; margin-bottom:19px;">
-                <!-- <div class="sidebar-brand-text mx-3"> Fountain Univ </div> -->
+                <div class="sidebar-brand-text mx-3"> Fountain Univ </div>
             </a>
             
 
@@ -61,10 +60,16 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="view_result.php" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">                    
-                    <span>View Result</span>
+                    <span>Result List</span>
                 </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="result_session.php">Check Result by Session</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Charts -->
