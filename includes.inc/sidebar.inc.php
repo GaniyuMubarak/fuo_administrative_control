@@ -71,20 +71,7 @@
                     </div>
                 </div>
             </li>
-
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="student_list.php" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">                    
-                    <span>Result List</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="result_session.php" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">                    
-                    <span>Check Result by Session</span>
-                </a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
