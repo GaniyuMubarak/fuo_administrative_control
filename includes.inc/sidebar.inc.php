@@ -36,11 +36,11 @@
                 </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="registered_student.php">Pre-Registration</a>
-                        <a class="collapse-item" href="registered_student.php">Applicant Student</a>
-                        <a class="collapse-item" href="registered_student.php">Admitted Student</a>
-                        <a class="collapse-item" href="registered_student.php">Registered Student</a>
-                        <a class="collapse-item" href="#">Enrolled Student</a>
+                        <a class="collapse-item" href="registered_student.php">Pre-Registration List</a>
+                        <a class="collapse-item" href="registered_student.php">Applicant Student List</a>
+                        <a class="collapse-item" href="registered_student.php">Admitted Student List</a>
+                        <a class="collapse-item" href="registered_student.php">Registered Student List</a>
+                        <a class="collapse-item" href="#">Enrolled Student List</a>
                     </div>
                 </div>
             </li>
