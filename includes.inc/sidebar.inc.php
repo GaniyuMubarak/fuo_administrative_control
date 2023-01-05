@@ -36,8 +36,11 @@
                 </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="registered_student.php">Pre-Registration</a>
+                        <a class="collapse-item" href="registered_student.php">Applicant Student</a>
+                        <a class="collapse-item" href="registered_student.php">Admitted Student</a>
                         <a class="collapse-item" href="registered_student.php">Registered Student</a>
-                        <a class="collapse-item" href="#">Registered Courses</a>
+                        <a class="collapse-item" href="#">Enrolled Student</a>
                     </div>
                 </div>
             </li>
@@ -74,8 +77,35 @@
             <!-- Nav Item - Charts -->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
+            
             <!-- Heading -->
+            <div class="sidebar-heading">
+                Payment
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">                   
+                    <span>Payment</span>
+                </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="payment.php">View Payment</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="student_list.php" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">                    
+                    <span>Student List</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Lecturers
             </div>
