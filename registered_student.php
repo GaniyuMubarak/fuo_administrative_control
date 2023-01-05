@@ -59,7 +59,7 @@ if(!isset($_SESSION["emailAddress"])){
                                     <tbody>
                                         <?php
                                         require_once "includes.inc/database.inc.php";
-                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no,    students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN registered_courses ON students.matric_no=registered_courses.matric_no INNER JOIN department ON department.department_id=students.department ORDER BY students.id ASC";
+                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN registered_courses ON students.matric_no=registered_courses.matric_no INNER JOIN department ON department.department_id=students.department ORDER BY students.id ASC";
                                         $result=mysqli_query($connection, $query);
                                         while($row = mysqli_fetch_assoc($result))
                                         {
