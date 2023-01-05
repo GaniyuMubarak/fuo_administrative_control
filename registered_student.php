@@ -3,7 +3,6 @@ session_start();
 if(!isset($_SESSION["emailAddress"])){
     header("location: index.php?error=loginrequired");
 }
-
 ?>
 
 <?php
