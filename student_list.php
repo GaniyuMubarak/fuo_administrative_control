@@ -45,7 +45,7 @@ if(!isset($_SESSION["emailAddress"])){
                                         <div class="col-md-6">
                                             <select class="form-select form-select-lg mb-3 input-group form-control" id="slct1" onchange="populate(this.id, 'slct2')" name="college" required>
                                             <option selected disabled value="">-- Choose your College -- </option>
-                                            <option value="cobmhes">College of Basic Medical & Health Sciences</option>
+                                            <option value="College of Basic Medical & Health Sciences">College of Basic Medical & Health Sciences</option>
                                             <option value="comass">College of Management and Social Sciences</option>
                                             <option value="conas">College of Nutural and Applied Sciences</option>
                                             <option value="law">College of Law</option>
@@ -103,7 +103,7 @@ if(!isset($_SESSION["emailAddress"])){
                                             $college = $_POST['college'];
                                             $department = $_POST['dept'];
                                             $level = $_POST['level'];
-                                            $query= "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN registered_courses ON students.matric_no=registered_courses.matric_no INNER JOIN department ON department.department_id=students.department WHERE faculty= $college AND department= $department AND level= $level ORDER BY students.id ASC";
+                                            $query= "SELECT DISTINCT students.id, students.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN faculty ON faculty.faculty_id=students.faculty INNER JOIN department ON department.department_id=students.department WHERE faculty.faculty_name=$college AND department.department_name= $department AND students.level= $level ORDER BY students.id ASC";
                                            $result=mysqli_query($connection, $query);
                                             if(mysqli_num_rows($result) > 0){
                                                 foreach($result as $items){
