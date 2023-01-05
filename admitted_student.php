@@ -33,39 +33,6 @@ if(!isset($_SESSION["emailAddress"])){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Student Page</h1>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card mt-4 my-5">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12 my-3">
-                                              <input type="text" class="input-group form-control" placeholder="Enter Matric Number e.g FUO/16/sample">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <select class="form-select form-select-lg mb-3 input-group form-control">
-                                                <option selected>Select Session</option>
-                                                <option value="2010/2011">2010/2011</option>
-									            <option value="2011/2012">2011/2012</option>
-                                                <option value="2012/2013">2012/2013</option>
-                                                <option value="2013/2014">2013/2014</option>
-                                                <option value="2014/2015">2014/2015</option>
-                                                <option value="2015/2016">2015/2016</option>
-                                                <option value="2016/2017">2016/2017</option>
-                                                <option value="2017/2018">2017/2018</option>
-                                              </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" value="Submit" class="btn btn-success">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
