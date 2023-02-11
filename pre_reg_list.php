@@ -43,23 +43,37 @@ if(!isset($_SESSION["emailAddress"])){
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>ID</th>
+                                            <th>Application Num</th>
+                                            <th>Surname</th>
+                                            <th>Firstname</th>
+                                            <th>Middlename</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        require_once "includes.inc/database.inc.php";
+                                        $query = "SELECT DISTINCT id, applicationNum, surname, firstname, middlename, phone, email, date FROM studentcreate ORDER BY id ASC";
+                                        $result=mysqli_query($connection, $query);
+                                        while($row = mysqli_fetch_assoc($result))
+                                        {
+                                        ?>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $row['applicationNum']?></td>
+                                            <td><?php echo $row['surname']?></td>
+                                            <td><?php echo $row['firstname']?></td>
+                                            <td><?php echo $row['middlename']?></td>
+                                            <td><?php echo $row['phone']?></td>
+                                            <td><?php echo $row['email']?></td>
+                                            <td><?php echo $row['date']?></td>
                                         </tr>
+                                        <?php
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

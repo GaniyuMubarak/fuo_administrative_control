@@ -8,13 +8,13 @@ function populate(s1,s2){
     s2.innerHTML = "";
 
     if(s1.value == 'cobmhes'){
-        var optionArray = ['select department|Select Department', 'environment health science|Environment Health Science', 'general studies(gns)|General Studies(GNS)', 'medical laboratory science|Medical Laboratory Science', 'nursing|Nursing', 'public health|Public Health'];
+        var optionArray = ['select department|Select Department', 'environmental health science|Environmental Health Science', 'general studies(gns)|General Studies(GNS)', 'medical laboratory science|Medical Laboratory Science', 'nursing|Nursing', 'public health|Public Health'];
     }
     else if(s1.value == 'comass'){
         var optionArray = ['select department|Select Department', 'accounting|Accounting', 'banking and finance|Banking and Finance', 'business administration|Business Administration', 'economics|Economics', 'general studies (gns)|General Studies (GNS)', 'mass communication|Mass Communication', 'political science and public admin|Political Science and Public Admin', 'sociology|Sociology'];
     }
     else if(s1.value == 'conas'){
-        var optionArray = ['select department|Select Department', 'biological science (microbiology)|Biological Science (Microbiology)', 'chemical science (biochemistry and nutrition)|Chemical Science (Biochemistry and Nutrition)', 'computer science|Computer Science', 'chemical science (industrial and environmental chemistry)|Chemical Science (Industrial and Environment Chemistry)', 'general studies (gns)|General Studies (GNS)', 'mathematics|Mathematics', 'physics, electronics adn earth science|Physics, Electronics and Earth Science'];
+        var optionArray = ['select department|Select Department', 'biological science (microbiology)|Biological Science (Microbiology)', 'chemical science (biochemistry and nutrition)|Chemical Science (Biochemistry and Nutrition)', 'computer science|Computer Science', 'chemical science (industrial and environmental chemistry)|Chemical Science (Industrial and Environment Chemistry)', 'general studies (gns)|General Studies (GNS)', 'mathematics|Mathematics', 'physics, electronics & earth science|Physics, Electronics & Earth Science'];
     }
     else if(s1.value == 'law'){
         var optionArray = ['select department|Select Department', 'common and islamic law|Common and Islamic Law', 'common law|Common Law', 'general studies (gns)|General Studies (GNS)', 'islamic law|Islamic Law'];

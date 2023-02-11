@@ -33,33 +33,50 @@ if(!isset($_SESSION["emailAddress"])){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Student Page</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Enrolled Student List Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>S/N</th>
+                                            <th>Matric No</th>
+                                            <th>Surname</th>
+                                            <th>Firstname</th>
+                                            <th>middlename</th>
+                                            <th>Department</th>
+                                            <th>Year of Admission</th>
+                                            <th>Level</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                        require_once "includes.inc/database.inc.php";
+                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023' ORDER BY registered_courses.session DESC";
+                                        $result=mysqli_query($connection, $query);
+                                        while($row = mysqli_fetch_assoc($result))
+                                        {
+                                        ?>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $row['matric_no']?></td>
+                                            <td><?php echo $row['surname']?></td>
+                                            <td><?php echo $row['first_name']?></td>
+                                            <td><?php echo $row['middle_name']?></td>
+                                            <td><?php echo $row['department_name']?></td>
+                                            <td><?php echo $row['year_of_admission']?></td>
+                                            <td><?php echo $row['level']?></td>
                                         </tr>
+                                        <?php
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

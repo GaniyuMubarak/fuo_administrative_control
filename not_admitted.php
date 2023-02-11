@@ -33,42 +33,43 @@ if(!isset($_SESSION["emailAddress"])){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Student Page</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">applicant Student List Table</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <thead>
                                         <tr>
-                                            <th>S/N</th>
-                                            <th>Matric No</th>
+                                            <th>ID</th>
+                                            <th>Application Number</th>
                                             <th>Surname</th>
-                                            <th>Firstname</th>
-                                            <th>Session</th>
-                                            <th>Date</th>
+                                            <th>Othername</th>
+                                            <th>Applied Course One</th>
+                                            <th>Applied Course Two</th>
+                                            <th>Jamb Registration Number</th>
+                                            <th>Submitted Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
+                                    <?php
                                         require_once "includes.inc/database.inc.php";
-                                        $query = "SELECT DISTINCT application_studentinfo.id, academic_studentinfo.new_appID, application_studentinfo.surname, application_studentinfo.othername, student_payment.session, student_payment.date_time FROM student_payment INNER JOIN academic_studentinfo ON student_payment.matric=academic_studentinfo.new_appID INNER JOIN application_studentinfo ON application_studentinfo.applicationID=academic_studentinfo.applicationID WHERE student_payment.session='2022/2023' AND student_payment.payment_type='school fee' AND student_payment.paystack_return!='0';";
+                                        $query = "SELECT DISTINCT academic_studentinfo.id, academic_studentinfo.applicationID, application_studentinfo.surname, application_studentinfo.othername, academic_studentinfo.FirstChoiceCourse, academic_studentinfo.SecondChoiceCourse, academic_studentinfo.JAMBregNumber, academic_studentinfo.date FROM academic_studentinfo INNER JOIN application_studentinfo ON academic_studentinfo.applicationID=application_studentinfo.applicationID WHERE academic_studentinfo.AdminStatus= 'not admit' AND application_studentinfo.session='2022/2023' AND academic_studentinfo.applicationID!=' ' ORDER BY application_studentinfo.session DESC";
                                         $result=mysqli_query($connection, $query);
                                         while($row = mysqli_fetch_assoc($result))
                                         {
                                         ?>
                                         <tr>
                                             <td><?php echo $row['id']?></td>
-                                            <td><?php echo $row['new_appID']?></td>
+                                            <td><?php echo $row['applicationID']?></td>
                                             <td><?php echo $row['surname']?></td>
                                             <td><?php echo $row['othername']?></td>
-                                            <td><?php echo $row['session']?></td>
-                                            <td><?php echo $row['date_time']?></td>
+                                            <td><?php echo $row['FirstChoiceCourse']?></td>
+                                            <td><?php echo $row['SecondChoiceCourse']?></td>
+                                            <td><?php echo $row['JAMBregNumber']?></td>
+                                            <td><?php echo $row['date']?></td>
                                         </tr>
                                         <?php
                                         }

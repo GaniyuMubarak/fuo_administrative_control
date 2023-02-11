@@ -1,9 +1,10 @@
 <?php
 session_start();
+
 if(!isset($_SESSION["emailAddress"])){
     header("location: index.php?error=loginrequired");
 }
-
+include 'includes.inc/config.php';
 ?>
 
 <?php
@@ -45,7 +46,7 @@ if(!isset($_SESSION["emailAddress"])){
                                         <div class="col-md-6">
                                             <select class="form-select form-select-lg mb-3 input-group form-control" id="slct1" onchange="populate(this.id, 'slct2')" name="college" required>
                                             <option selected disabled value="">-- Choose your College -- </option>
-                                            <option value="College of Basic Medical & Health Sciences">College of Basic Medical & Health Sciences</option>
+                                            <option value="cobmhes">College of Basic Medical & Health Sciences</option>
                                             <option value="comass">College of Management and Social Sciences</option>
                                             <option value="conas">College of Nutural and Applied Sciences</option>
                                             <option value="law">College of Law</option>
@@ -97,13 +98,18 @@ if(!isset($_SESSION["emailAddress"])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        require_once "includes.inc/database.inc.php";
+
                                         if(isset($_POST['search'])){
                                             print"We are good to go";
                                             $college = $_POST['college'];
+                                            echo $college;
                                             $department = $_POST['dept'];
                                             $level = $_POST['level'];
-                                            $query= "SELECT DISTINCT students.id, students.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN faculty ON faculty.faculty_id=students.faculty INNER JOIN department ON department.department_id=students.department WHERE faculty.faculty_name=$college AND department.department_name= $department AND students.level= $level ORDER BY students.id ASC";
+
+                                            $college_id = GetFacultyId($college);
+                                            $department_id = GetDepartmentId($department);
+
+                                            $query= "SELECT DISTINCT * FROM students INNER JOIN faculty ON faculty.faculty_id=students.faculty INNER JOIN department ON department.department_id=students.department WHERE students.level= '$level' AND  students.faculty = '$college_id' AND students.department = '$department_id' ORDER BY students.id ASC";
                                            $result=mysqli_query($connection, $query);
                                             if(mysqli_num_rows($result) > 0){
                                                 foreach($result as $items){

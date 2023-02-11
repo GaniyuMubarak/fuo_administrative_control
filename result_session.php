@@ -40,27 +40,32 @@ if(!isset($_SESSION["emailAddress"])){
                         <div class="col-md-12">
                             <div class="card mt-4 my-5">
                                 <div class="card-body">
+                                <form action="" method="post">
                                     <div class="row">
-                                        <div class="col-md-12 my-3">
-                                              <input type="text" class="input-group form-control" placeholder="Enter Matric Number e.g FUO/16/sample">
+                                        <div class="col-md-6">
+                                              <input type="text" class="input-group form-control" placeholder="Enter Matric Number e.g FUO/16/sample" name="matric">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-select form-select-lg mb-3 input-group form-control" name="session">
+                                                <option selected>Select Session</option>
+                                                <option value="2019/2020">2019/2020</option>
+                                                <option value="2020/2021">2020/2021</option>
+                                                <option value="2021/2022">2021/2022</option>
+                                                <option value="2022/2023">2022/2023</option>
+                                              </select>
                                         </div>
                                         <div class="col-md-12">
-                                            <select class="form-select form-select-lg mb-3 input-group form-control">
-                                                <option selected>Select Session</option>
-                                                <option value="2010/2011">2010/2011</option>
-									            <option value="2011/2012">2011/2012</option>
-                                                <option value="2012/2013">2012/2013</option>
-                                                <option value="2013/2014">2013/2014</option>
-                                                <option value="2014/2015">2014/2015</option>
-                                                <option value="2015/2016">2015/2016</option>
-                                                <option value="2016/2017">2016/2017</option>
-                                                <option value="2017/2018">2017/2018</option>
+                                            <select class="form-select form-select-lg mb-3 input-group form-control" name="semester">
+                                                <option selected>Select Semester</option>
+                                                <option value="first">First</option>
+									            <option value="second">Second</option>
                                               </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" value="Submit" class="btn btn-success">
+                                        <button type="submit" class="btn btn-success" name="search">Submit</button>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -76,23 +81,53 @@ if(!isset($_SESSION["emailAddress"])){
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>S/N</th>
+                                            <th>Matric Number</th>
+                                            <th>College</th>
+                                            <th>Department</th>
+                                            <th>Session</th>
+                                            <th>Level</th>
+                                            <th>Course Code</th>
+                                            <th>Course Title</th>
+                                            <th>CA</th>
+                                            <th>Exam Score</th>
+                                            <th>Total Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        <?php
+
+                                        if(isset($_POST['search'])){
+                                            $matric_no = $_POST['matric'];
+                                            $session = $_POST['session'];
+                                            $semester = $_POST['semester'];
+                                            require_once "includes.inc/database.inc.php";
+                                            $query= "SELECT DISTINCT * FROM results INNER JOIN faculty ON faculty.faculty_id=results.faculty INNER JOIN department ON department.department_id=results.department WHERE matric_no = '$matric_no' AND  session = '$session' AND semester = '$semester' ORDER BY id ASC";
+                                            $result=mysqli_query($connection, $query);
+                                            if(mysqli_num_rows($result) > 0){
+                                                foreach($result as $items){
+                                                    ?>
+                                                <tr>
+                                                    <td><?= $items['id'];?></td>
+                                                    <td><?= $items['matric_no'];?></td>
+                                                    <td><?= $items['faculty_name'];?></td>
+                                                    <td><?= $items['department_name'];?></td>
+                                                    <td><?= $items['session'];?></td>
+                                                    <td><?= $items['level'];?></td>
+                                                    <td><?= $items['course_code'];?></td>
+                                                    <td><?= $items['course_title'];?></td>
+                                                    <td><?= $items['ca'];?></td>
+                                                    <td><?= $items['exam_score'];?></td>
+                                                    <td><?= $items['total_score'];?></td>
+                                                </tr>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                                <?php
+                                        }
+                                        ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
