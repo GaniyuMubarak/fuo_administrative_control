@@ -56,17 +56,19 @@ if(!isset($_SESSION["emailAddress"])){
                                     <tbody>
                                         <?php
                                         require_once "includes.inc/database.inc.php";
-<<<<<<< HEAD
+
                                         $query = "SELECT DISTINCT application_studentinfo.id, academic_studentinfo.new_appID, application_studentinfo.surname, application_studentinfo.othername, student_payment.session, student_payment.date_time FROM student_payment INNER JOIN academic_studentinfo ON student_payment.matric=academic_studentinfo.new_appID INNER JOIN application_studentinfo ON application_studentinfo.applicationID=academic_studentinfo.applicationID WHERE student_payment.session='2022/2023' AND student_payment.payment_type='school fee' AND student_payment.paystack_return!='0';";
-=======
-                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN registered_courses ON students.matric_no=registered_courses.matric_no INNER JOIN department ON department.department_id=students.department ORDER BY students.id ASC";
->>>>>>> c82f40c832a9ecc415c5a2c52dccedda8286cb08
+
+                                        // $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM students INNER JOIN registered_courses ON students.matric_no=registered_courses.matric_no INNER JOIN department ON department.department_id=students.department ORDER BY students.id ASC";
+
                                         $result=mysqli_query($connection, $query);
+                                        $i = 0;
                                         while($row = mysqli_fetch_assoc($result))
                                         {
+                                            $i++;
                                         ?>
                                         <tr>
-                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $i ?></td>
                                             <td><?php echo $row['new_appID']?></td>
                                             <td><?php echo $row['surname']?></td>
                                             <td><?php echo $row['othername']?></td>

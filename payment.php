@@ -2,6 +2,8 @@
 session_start();
 if(!isset($_SESSION["emailAddress"])){
     header("location: index.php?error=loginrequired");
+}else{
+    require_once "includes.inc/database.inc.php";
 }
 
 ?>
@@ -47,11 +49,18 @@ if(!isset($_SESSION["emailAddress"])){
                                         </div>
                                         <div class="col-md-12 my-3">
                                             <select class="form-select form-select-lg mb-3 input-group form-control" name="session">
-                                                <option selected>Select Session</option>
-                                                <option value="2019/2020">2019/2020</option>
-                                                <option value="2020/2021">2020/2021</option>
-                                                <option value="2021/2022">2021/2022</option>
-                                                <option value="2022/2023">2022/2023</option>
+                                            <option value="" require disabled selected>-- Select Session -- </option>
+                                            <?php
+                                                    $query = mysqli_query($connection, 'SELECT * FROM session');
+                                                    if(mysqli_num_rows($query) > 0){
+                                                        while($row = mysqli_fetch_array($query)){
+                                                            $sessionId = $row['id'];
+                                                            $sessionName = $row['session_name'];
+                                                            echo '<option>'. $sessionName . '</option>';
+                                                        }
+                                                    }
+                                                
+                                                ?>
                                               </select>
                                         </div>
                                         <div class="col-md-4">
@@ -95,10 +104,12 @@ if(!isset($_SESSION["emailAddress"])){
                                             $query= "SELECT DISTINCT * FROM student_payment INNER JOIN students ON students.matric_no=student_payment.matric WHERE matric = '$matric_no' AND  session = '$session' AND paystack_return!='0'";
                                             $result=mysqli_query($connection, $query);
                                             if(mysqli_num_rows($result) > 0){
+                                                $i = 0;
                                                 foreach($result as $items){
+                                                    $i++;
                                                     ?>
                                                 <tr>
-                                                    <td><?= $items['id'];?></td>
+                                                    <td><?= $i ?></td>
                                                     <td><?= $items['matric'];?></td>
                                                     <td><?= $items['surname'];?></td>
                                                     <td><?= $items['first_name'];?></td>

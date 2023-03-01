@@ -17,4 +17,5 @@
         loginUser($connection, $emailAddress, $password);
     }else{
         header("Wrong input!!!");
+        exit();
     }

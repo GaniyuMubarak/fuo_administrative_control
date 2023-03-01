@@ -59,13 +59,15 @@ if(!isset($_SESSION["emailAddress"])){
                                     <tbody>
                                         <?php
                                         require_once "includes.inc/database.inc.php";
-                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023' ORDER BY registered_courses.session DESC";
+                                        $query = "SELECT DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023' ORDER BY students.level DESC";
                                         $result=mysqli_query($connection, $query);
+                                        $i = 0;
                                         while($row = mysqli_fetch_assoc($result))
                                         {
+                                            $i++;
                                         ?>
                                         <tr>
-                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $i ?></td>
                                             <td><?php echo $row['matric_no']?></td>
                                             <td><?php echo $row['surname']?></td>
                                             <td><?php echo $row['first_name']?></td>

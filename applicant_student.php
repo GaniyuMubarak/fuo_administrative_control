@@ -53,14 +53,16 @@ if(!isset($_SESSION["emailAddress"])){
                                     </thead>
                                     <tbody>
                                     <?php
+                                        $i = 0;
                                         require_once "includes.inc/database.inc.php";
                                         $query = "SELECT DISTINCT id, applicationID, surname, othername, session, date_submitted FROM application_studentinfo WHERE session='2022/2023' AND applicationID!='' ORDER BY session DESC";
                                         $result=mysqli_query($connection, $query);
                                         while($row = mysqli_fetch_assoc($result))
                                         {
+                                            $i++;
                                         ?>
                                         <tr>
-                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $i?></td>
                                             <td><?php echo $row['applicationID']?></td>
                                             <td><?php echo $row['surname']?></td>
                                             <td><?php echo $row['othername']?></td>

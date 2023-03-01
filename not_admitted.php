@@ -58,11 +58,13 @@ if(!isset($_SESSION["emailAddress"])){
                                         require_once "includes.inc/database.inc.php";
                                         $query = "SELECT DISTINCT academic_studentinfo.id, academic_studentinfo.applicationID, application_studentinfo.surname, application_studentinfo.othername, academic_studentinfo.FirstChoiceCourse, academic_studentinfo.SecondChoiceCourse, academic_studentinfo.JAMBregNumber, academic_studentinfo.date FROM academic_studentinfo INNER JOIN application_studentinfo ON academic_studentinfo.applicationID=application_studentinfo.applicationID WHERE academic_studentinfo.AdminStatus= 'not admit' AND application_studentinfo.session='2022/2023' AND academic_studentinfo.applicationID!=' ' ORDER BY application_studentinfo.session DESC";
                                         $result=mysqli_query($connection, $query);
+                                        $i = 0;
                                         while($row = mysqli_fetch_assoc($result))
                                         {
+                                            $i++;
                                         ?>
                                         <tr>
-                                            <td><?php echo $row['id']?></td>
+                                            <td><?php echo $i ?></td>
                                             <td><?php echo $row['applicationID']?></td>
                                             <td><?php echo $row['surname']?></td>
                                             <td><?php echo $row['othername']?></td>

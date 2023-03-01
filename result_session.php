@@ -2,6 +2,8 @@
 session_start();
 if(!isset($_SESSION["emailAddress"])){
     header("location: index.php?error=loginrequired");
+}else{
+    require_once "includes.inc/database.inc.php";
 }
 
 ?>
@@ -47,18 +49,34 @@ if(!isset($_SESSION["emailAddress"])){
                                         </div>
                                         <div class="col-md-6">
                                             <select class="form-select form-select-lg mb-3 input-group form-control" name="session">
-                                                <option selected>Select Session</option>
-                                                <option value="2019/2020">2019/2020</option>
-                                                <option value="2020/2021">2020/2021</option>
-                                                <option value="2021/2022">2021/2022</option>
-                                                <option value="2022/2023">2022/2023</option>
+                                            <option value="" require disabled selected>-- Select Session -- </option>
+                                                <?php
+                                                    $query = mysqli_query($connection, 'SELECT * FROM session');
+                                                    if(mysqli_num_rows($query) > 0){
+                                                        while($row = mysqli_fetch_array($query)){
+                                                            $sessionId = $row['id'];
+                                                            $sessionName = $row['session_name'];
+                                                            echo '<option>'. $sessionName . '</option>';
+                                                        }
+                                                    }
+                                                
+                                                ?>
                                               </select>
                                         </div>
                                         <div class="col-md-12">
                                             <select class="form-select form-select-lg mb-3 input-group form-control" name="semester">
-                                                <option selected>Select Semester</option>
-                                                <option value="first">First</option>
-									            <option value="second">Second</option>
+                                            <option value="" require disabled selected>-- Select Semester -- </option>
+                                                <?php
+                                                    $query = mysqli_query($connection, 'SELECT * FROM semester');
+                                                    if(mysqli_num_rows($query) > 0){
+                                                        while($row = mysqli_fetch_array($query)){
+                                                            $semesterId = $row['id'];
+                                                            $semesterName = $row['semester_name'];
+                                                            echo '<option>'. $semesterName . '</option>';
+                                                        }
+                                                    }
+                                                
+                                                ?>
                                               </select>
                                         </div>
                                         <div class="col-md-4">
@@ -101,14 +119,20 @@ if(!isset($_SESSION["emailAddress"])){
                                             $matric_no = $_POST['matric'];
                                             $session = $_POST['session'];
                                             $semester = $_POST['semester'];
-                                            require_once "includes.inc/database.inc.php";
-                                            $query= "SELECT DISTINCT * FROM results INNER JOIN faculty ON faculty.faculty_id=results.faculty INNER JOIN department ON department.department_id=results.department WHERE matric_no = '$matric_no' AND  session = '$session' AND semester = '$semester' ORDER BY id ASC";
+                                            $query= "SELECT DISTINCT * FROM results INNER JOIN faculty ON 
+                                            faculty.faculty_id=results.faculty INNER JOIN department ON 
+                                            department.department_id=results.department WHERE matric_no = '$matric_no' AND 
+                                            session = '$session' AND semester = '$semester' ORDER BY id ASC";
+
+                                            
                                             $result=mysqli_query($connection, $query);
                                             if(mysqli_num_rows($result) > 0){
+                                                $i = 0;
                                                 foreach($result as $items){
+                                                    $i++
                                                     ?>
                                                 <tr>
-                                                    <td><?= $items['id'];?></td>
+                                                    <td><?= $i?></td>
                                                     <td><?= $items['matric_no'];?></td>
                                                     <td><?= $items['faculty_name'];?></td>
                                                     <td><?= $items['department_name'];?></td>

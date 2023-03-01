@@ -3,8 +3,9 @@ session_start();
 
 if(!isset($_SESSION["emailAddress"])){
     header("location: index.php?error=loginrequired");
+}else{
+    require_once "includes.inc/database.inc.php";
 }
-include 'includes.inc/config.php';
 ?>
 
 <?php
@@ -44,27 +45,39 @@ include 'includes.inc/config.php';
                                     <form action="" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <select class="form-select form-select-lg mb-3 input-group form-control" id="slct1" onchange="populate(this.id, 'slct2')" name="college" required>
-                                            <option selected disabled value="">-- Choose your College -- </option>
-                                            <option value="cobmhes">College of Basic Medical & Health Sciences</option>
-                                            <option value="comass">College of Management and Social Sciences</option>
-                                            <option value="conas">College of Nutural and Applied Sciences</option>
-                                            <option value="law">College of Law</option>
+                                            <select class="form-select form-select-lg mb-3 input-group form-control" name="college" required id="college">  
+                                                <option value="" require disabled selected>-- Choose your College -- </option>            
+                                                <?php
+                                                $query = mysqli_query($connection, 'SELECT * FROM faculty');
+                                                if(mysqli_num_rows($query) > 0){
+                                                    while($row =  mysqli_fetch_array($query)){
+                                                        $facultyId = $row['faculty_id'];
+                                                        $facultyName = $row['faculty_name'];
+                                                        echo '<option value= '.$facultyId . '>'. $facultyName . '</option>';
+                                                    }
+                                                }
+                                                ?>
                                               </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="form-select form-select-lg mb-3 input-group form-control" id="slct2" name="dept" required>
+                                            <select class="form-select form-select-lg mb-3 input-group form-control" id="department" name="dept" required>
                                             <option selected disabled value="">-- Choose your Department -- </option>
                                               </select>
                                         </div>
                                         <div class="col-md-12">
-                                            <select class="form-select form-select-lg mb-3 input-group form-control" name="level" require>
-                                                <option selected>Select Level</option>
-                                                <option value="100">100</option>
-                                                <option value="200">200</option>
-                                                <option value="300">300</option>
-                                                <option value="400">400</option>
-                                              </select>
+                                            <select class="form-select form-select-lg mb-3 input-group form-control" name="level">
+                                            <option value="" disabled selected>-- Choose your Level -- </option>
+                                            <?php
+                                            $query = mysqli_query($connection, "SELECT DISTINCT * FROM level WHERE id!= 6 AND id!= 5");
+                                            if(mysqli_num_rows($query) > 0){
+                                                while($row = mysqli_fetch_array($query)){
+                                                    $levelStatus = $row['level'];
+                                                    $levelID = $row['id'];
+                                                    echo '<option>'.  $levelStatus . '</option>';   
+                                                }
+                                            }
+                                        ?>
+                                            </select>   
                                         </div>
                                         <div class="col-md-4">
                                         <button type="submit" class="btn btn-success" name="search">Submit</button>
@@ -104,18 +117,21 @@ include 'includes.inc/config.php';
                                             $college = $_POST['college'];
                                             echo $college;
                                             $department = $_POST['dept'];
+                                            echo $department;
                                             $level = $_POST['level'];
 
-                                            $college_id = GetFacultyId($college);
-                                            $department_id = GetDepartmentId($department);
-
-                                            $query= "SELECT DISTINCT * FROM students INNER JOIN faculty ON faculty.faculty_id=students.faculty INNER JOIN department ON department.department_id=students.department WHERE students.level= '$level' AND  students.faculty = '$college_id' AND students.department = '$department_id' ORDER BY students.id ASC";
+                                            $query= "SELECT DISTINCT * FROM students INNER JOIN faculty ON 
+                                            faculty.faculty_id=students.faculty INNER JOIN department ON  
+                                            department.department_id=students.department WHERE students.level= '$level' AND  
+                                            students.faculty = '$college' AND students.department = '$department' ORDER BY students.id ASC";
                                            $result=mysqli_query($connection, $query);
                                             if(mysqli_num_rows($result) > 0){
+                                                $i =0;
                                                 foreach($result as $items){
+                                                    $i++;
                                                     ?>
                                                 <tr>
-                                                    <td><?= $items['id'];?></td>
+                                                    <td><?= $i?></td>
                                                     <td><?= $items['matric_no'];?></td>
                                                     <td><?= $items['surname'];?></td>
                                                     <td><?= $items['first_name'];?></td>
@@ -189,6 +205,52 @@ include 'includes.inc/config.php';
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+
+    <script> 
+        $(document).ready( ()=> {
+            $('#college').on('change', ()=> {
+                let college = $('#college').val();
+               
+                // alert(college);
+                $.ajax({
+                    url : 'includes.inc/getFunction.php?department_id='+college,
+                    method : 'GET',
+                    success:function(result)
+                    {
+                        $('#department').html("<option> -- Select department -- </option>");
+                        if(result != ""){
+                            $('#department').append(result);
+                        }else{
+                            $('#department').html("<option> -- No Record Found-- </option>");
+                        }
+                       
+                       
+                    }
+                });
+            })
+        });
+
+        $(document).ready( ()=> {
+            $('#department').on('change', ()=> {
+                let department = $('#department').val();
+                $.ajax({
+                    url:'includes.inc/getFunction.php?id='+department,
+                    method : 'GET', 
+                    success:function(result)
+                    {
+                        $('#level').html("<option> -- Select Level -- </option>");
+                        if(result != ""){
+                            $('#level').append(result);
+                        }else{
+                            $('#level').html("<option> -- No Level Found -- </option>");
+                        }
+                    }
+                });
+            })
+        });
+
+    </script>
 </body>
 
 </html>
+

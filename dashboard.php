@@ -136,6 +136,86 @@ require_once "includes.inc/database.inc.php";
             </div>
         </div>
     </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-info text-uppercase mb-4">
+                            Number of Student Cleared by clinic</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php 
+                            $query = "SELECT COUNT(DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level) FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023'";
+                            $result=mysqli_query($connection, $query);
+                            $get_result = mysqli_fetch_array($result);
+                            print $get_result[0];
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-info text-uppercase mb-4">
+                            Number of Student Cleared by Bursary</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php 
+                            $query = "SELECT COUNT(DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level) FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023'";
+                            $result=mysqli_query($connection, $query);
+                            $get_result = mysqli_fetch_array($result);
+                            print $get_result[0];
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-info text-uppercase mb-4">
+                            Number of Student Cleared by Student Representative Council</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php 
+                            $query = "SELECT COUNT(DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level) FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023'";
+                            $result=mysqli_query($connection, $query);
+                            $get_result = mysqli_fetch_array($result);
+                            print $get_result[0];
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-info text-uppercase mb-4">
+                        Number of Student Cleared by FUMSS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php 
+                            $query = "SELECT COUNT(DISTINCT students.id, registered_courses.matric_no, students.surname, students.first_name, students.middle_name, department.department_name ,students.year_of_admission, students.level) FROM registered_courses INNER JOIN students ON registered_courses.matric_no=students.matric_no INNER JOIN department ON department.department_id=students.department WHERE registered_courses.session='2022/2023'";
+                            $result=mysqli_query($connection, $query);
+                            $get_result = mysqli_fetch_array($result);
+                            print $get_result[0];
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Content Row -->
 </div>

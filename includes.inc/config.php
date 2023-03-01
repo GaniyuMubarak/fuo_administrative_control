@@ -21,7 +21,9 @@ function GetDepartmentId($department_name)
     $result_get_department = mysqli_query($connection, $get_department_query);
     if($result_get_department){
         $get_id_department = mysqli_fetch_array($result_get_department);
-        return $get_id_department['department_id'];
+        // var_dump($get_id_department);
+        var_dump($department_name);
+        // return $get_id_department['department_id'];
     }else{
         return null;
     }
